@@ -1,7 +1,7 @@
 .PHONY: fmtcheck fmt build lint cover test
 
 build:
-	go build -ldflags "-X codehub.sva.de/deploy4sva/d4sva/cmd.version=$(shell git describe --abbrev=0 --tags)" -o d4sva
+	go build -ldflags "-X github.com/FalcoSuessgott/golang-cli-template/cmd.version=$(shell git describe --abbrev=0 --tags)" -o golang-cli-template
 
 fmtcheck:
 	@sh -c "'$(CURDIR)/scripts/gofmtcheck.sh'"

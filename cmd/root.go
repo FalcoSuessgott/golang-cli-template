@@ -8,7 +8,7 @@ var (
 	version = ""
 )
 
-func NewRootCmd() *cobra.Command {
+func newRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "golang-cli-template",
 		Short: "Develope and deploy infrastructure configurations on multiple provider",
@@ -22,5 +22,5 @@ func NewRootCmd() *cobra.Command {
 
 // Execute invokes the command.
 func Execute() error {
-	return NewRootCmd().Execute()
+	return newRootCmd().Execute()
 }
