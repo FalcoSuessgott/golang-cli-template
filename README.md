@@ -1,6 +1,8 @@
 # golang-cli-template
 A general purpose  project template for golang CLI applications
 
+full tested golang project template based on ...
+
 # Features
 - goreleaser
 - golangci
@@ -8,9 +10,9 @@ A general purpose  project template for golang CLI applications
 - cobra
 
 # Project Structure
-- pkg
-- internal
-- cmd
+- pkg package ok to import
+- internal internal applications package
+- cmd 
 
 # Todo
 - README badges
