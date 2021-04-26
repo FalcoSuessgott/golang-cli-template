@@ -1,8 +1,8 @@
 package example
 
-// Sum returns the summary of to integers.
-func Sum(a, b int) int {
-	return a + b 
+// Add returns the summary of two integers.
+func Add(a, b int) int {
+	return a + b
 }
 
 // Multiply returns the product of two integers

@@ -10,6 +10,7 @@ full tested golang project template based on ...
 - cobra
 
 # Project Structure
+- assets
 - pkg package ok to import
 - internal internal applications package
 - cmd 
@@ -19,3 +20,4 @@ full tested golang project template based on ...
 - github actions
 - gitlab ci 
 
+ü
