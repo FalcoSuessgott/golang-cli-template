@@ -13,7 +13,7 @@ func newVersionCmd() *cobra.Command {
 		Args:         cobra.NoArgs,
 		SilenceUsage: true,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Fprintf(cmd.OutOrStdout(), "%s\n", version)
+			fmt.Fprintf(cmd.OutOrStdout(), "%s", version)
 		},
 	}
 }

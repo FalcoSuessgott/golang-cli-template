@@ -11,14 +11,14 @@ var (
 func newRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "golang-cli-template",
-		Short: "Develope and deploy infrastructure configurations on multiple provider",
+		Short: "Develop and deploy infrastructure configurations on multiple provider",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return cmd.Help()
 		},
 	}
 
-	cmd.AddCommand(newVersionCmd()) // version
-	cmd.AddCommand(newExampleCmd()) // exmaple
+	cmd.AddCommand(newVersionCmd()) // version subcommand
+	cmd.AddCommand(newExampleCmd()) // examble subcommand
 
 	return cmd
 }

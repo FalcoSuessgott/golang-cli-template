@@ -7,12 +7,12 @@ import (
 )
 
 func TestValidInteger(t *testing.T) {
-	i, ok := ConvertToInteger(2)
-	assert.Equal(t, i, 2)
+	i, ok := ToInteger("2")
+	assert.Equal(t, 2, i)
 	assert.Nil(t, ok, "expect error to be nil")
 }
 
 func TestInValidIntegers(t *testing.T) {
-	_, ok := ConvertToInteger("string")
+	_, ok := ToInteger("string")
 	assert.Error(t, ok)
 }

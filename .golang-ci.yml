@@ -3,3 +3,5 @@ linters-settings:
     line-length: 130
 linters:
   enable-all: true
+  disable:
+    - testpackage
