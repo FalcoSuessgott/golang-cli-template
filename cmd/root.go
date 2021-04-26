@@ -9,7 +9,7 @@ var version = ""
 func newRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "golang-cli-template",
-		Short: "Develop and deploy infrastructure configurations on multiple provider",
+		Short: "golang-cli project template demo application",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return cmd.Help()
 		},

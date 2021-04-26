@@ -10,7 +10,7 @@ This template serves as a starting point for golang commandline applications bas
 - [golangci-lint](https://golangci-lint.run/) for linting and formatting
 - Golang Github Actions Stages (Linting, Testing, Releasing)
 - tested [cobra](https://cobra.dev/) setup
-- Makefile
+- Makefile - with various useful targets (see Makefile Targets)
 
 # Project Layout
 * [assets/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/assets) => docs, images, etc
@@ -21,8 +21,8 @@ This template serves as a starting point for golang commandline applications bas
 # Demo Application
 
 ```sh
-$> go run *.go -h                                                  
-Develop and deploy infrastructure configurations on multiple provider
+$> golang-cli-template                                                  
+golang-cli project template demo application
 
 Usage:
   golang-cli-template [flags]
@@ -40,13 +40,14 @@ Use "golang-cli-template [command] --help" for more information about a command.
 ```
 
 ```sh
-$> go run *.go 2 5 --add                                                
+$> golang-cli-template 2 5 --add                                                
 7
 
-$> go run *.go 2 5 --multiply
+$> golang-cli-template 2 5 --multiply
 10
 ```
-# Makefile Targes
+
+# Makefile Targets
 
 ## format
 ```sh
