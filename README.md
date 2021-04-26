@@ -18,6 +18,34 @@ This template serves as a starting point for golang commandline applications bas
 * [pkg/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/pkg)  => packages that are okay to import for other projects
 * [internal/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/pkg)  => packages that are only for project internal purposes
 
+# Demo Application
+
+```sh
+$> go run *.go -h                                                  
+Develop and deploy infrastructure configurations on multiple provider
+
+Usage:
+  golang-cli-template [flags]
+  golang-cli-template [command]
+
+Available Commands:
+  example     example subcommand which adds or multiplies two given integers
+  help        Help about any command
+  version     Displays d4sva binary version
+
+Flags:
+  -h, --help   help for golang-cli-template
+
+Use "golang-cli-template [command] --help" for more information about a command.
+```
+
+```sh
+$> go run *.go 2 5 --add                                                
+7
+
+$> go run *.go 2 5 --multiply
+10
+```
 # Makefile Targes
 
 ## format
