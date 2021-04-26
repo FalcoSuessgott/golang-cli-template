@@ -2,7 +2,7 @@
 
 # Check gofmt
 echo "==> Checking that code complies with gofmt requirements..."
-gofmt_files=$(find . -name '*.go' | grep -v vendor | xargs gofmt -l -s)
+gofmt_files=$(find . -name '*.go' | grep -v vendor | xargs gofumpt -l -s)
 if [[ -n ${gofmt_files} ]]; then
     echo 'gofmt needs running on the following files:'
     echo "${gofmt_files}"
@@ -10,4 +10,4 @@ if [[ -n ${gofmt_files} ]]; then
     exit
 fi
 
-exit 0%   
+exit 0  

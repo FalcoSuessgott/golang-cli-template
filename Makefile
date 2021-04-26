@@ -14,7 +14,7 @@ cover:
 	go tool cover -func=coverage.out
 
 fmt:
-	gofmt -w -s  .
+	gofumpt -w -s  .
 
 lint:
 	golangci-lint run -c .golang-ci.yml
