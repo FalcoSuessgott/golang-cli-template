@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +13,8 @@ func newRootCmd() *cobra.Command {
 		Use:   "golang-cli-template",
 		Short: "golang-cli project template demo application",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return cmd.Help()
+			fmt.Println(cmd.UsageString())
+			return nil
 		},
 	}
 

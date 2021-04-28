@@ -28,6 +28,17 @@ func TestExampleCommandMultiply(t *testing.T) {
 	assert.Equal(t, "6", string(out))
 }
 
+func TestExampleCommandMultiplyInvalidArgs(t *testing.T) {
+	cmd := newExampleCmd()
+	b := bytes.NewBufferString("")
+
+	cmd.SetArgs([]string{"2", "s", "--multiply"})
+	cmd.SetOut(b)
+
+	err := cmd.Execute()
+	assert.Error(t, err)
+}
+
 func TestExampleAdd(t *testing.T) {
 	cmd := newExampleCmd()
 	b := bytes.NewBufferString("")

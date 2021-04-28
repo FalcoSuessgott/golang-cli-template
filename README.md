@@ -9,6 +9,7 @@ This template serves as a starting point for golang commandline applications bas
 - [goreleaser](https://goreleaser.com/) with `deb.` and `.rpm` package releasing
 - [golangci-lint](https://golangci-lint.run/) for linting and formatting
 - Golang Github Actions Stages (Linting, Testing, Releasing)
+- Gitlab CI Configuration (Linting, Testing, Releasing)
 - tested [cobra](https://cobra.dev/) setup
 - Makefile - with various useful targets (see Makefile Targets)
 
@@ -48,6 +49,11 @@ $> golang-cli-template 2 5 --multiply
 ```
 
 # Makefile Targets
+
+## lint
+```sh
+make lint
+```
 
 ## format
 ```sh
