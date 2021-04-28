@@ -19,6 +19,23 @@ This template serves as a starting point for golang commandline applications bas
 * [pkg/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/pkg)  => packages that are okay to import for other projects
 * [internal/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/pkg)  => packages that are only for project internal purposes
 
+# How to use this template
+```sh
+{
+GITHUB_USER="my-github-user"
+PROJECT="new-golang-project"
+git clone git@github.com:FalcoSuessgott/golang-cli-template.git $PROJECT
+cd $PROJECT
+rm -rf .git
+find . -type f -exec sed -i "s/FalcoSuessgott\/golang-cli-template/$GITHUB_USER\/$PROJECT/g" {} +
+make fmt
+git init
+git add .
+git commit -m "initial commit"
+git remote add origin git@github.com:$GITHUB_USER/$PROJECT.git
+}
+```
+
 # Demo Application
 
 ```sh
