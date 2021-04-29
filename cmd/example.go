@@ -3,10 +3,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
-
 	"github.com/FalcoSuessgott/golang-cli-template/internal/convert"
 	"github.com/FalcoSuessgott/golang-cli-template/pkg/example"
+	"github.com/spf13/cobra"
 )
 
 const (
