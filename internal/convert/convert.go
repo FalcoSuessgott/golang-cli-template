@@ -6,7 +6,7 @@ import (
 )
 
 //nolint
-var errConvertionError = func(v interface{}) error {
+var errConversionError = func(v interface{}) error {
 	return fmt.Errorf("cannot convert value %v (type %T) to integer", v, v)
 }
 
@@ -14,7 +14,7 @@ var errConvertionError = func(v interface{}) error {
 func ToInteger(v interface{}) (int, error) {
 	i, err := strconv.Atoi(v.(string))
 	if err != nil {
-		return i, errConvertionError(v)
+		return i, errConversionError(v)
 	}
 
 	return i, nil

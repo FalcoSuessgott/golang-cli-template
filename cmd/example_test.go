@@ -2,10 +2,12 @@ package cmd
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestExampleCommandMultiply(t *testing.T) {
@@ -16,16 +18,12 @@ func TestExampleCommandMultiply(t *testing.T) {
 	cmd.SetOut(b)
 
 	err := cmd.Execute()
-	if err != nil {
-		t.Fail()
-	}
+	require.NoError(t, err)
 
 	out, err := ioutil.ReadAll(b)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
-	assert.Equal(t, "6", string(out))
+	assert.Equal(t, fmt.Sprintln("6"), string(out))
 }
 
 func TestExampleCommandMultiplyInvalidArgs(t *testing.T) {
@@ -47,14 +45,10 @@ func TestExampleAdd(t *testing.T) {
 	cmd.SetOut(b)
 
 	err := cmd.Execute()
-	if err != nil {
-		t.Fail()
-	}
+	require.NoError(t, err)
 
 	out, err := ioutil.ReadAll(b)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
-	assert.Equal(t, "5", string(out))
+	assert.Equal(t, fmt.Sprintln("5"), string(out))
 }

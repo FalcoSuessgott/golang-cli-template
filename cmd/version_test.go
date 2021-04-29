@@ -2,10 +2,12 @@ package cmd
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestVersionCommand(t *testing.T) {
@@ -15,14 +17,10 @@ func TestVersionCommand(t *testing.T) {
 	cmd.SetOut(b)
 
 	err := cmd.Execute()
-	if err != nil {
-		t.Fail()
-	}
+	require.NoError(t, err)
 
 	out, err := ioutil.ReadAll(b)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
-	assert.Equal(t, version, string(out))
+	assert.Equal(t, fmt.Sprintln(version), string(out))
 }

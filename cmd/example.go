@@ -3,10 +3,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
-
 	"github.com/FalcoSuessgott/golang-cli-template/internal/convert"
 	"github.com/FalcoSuessgott/golang-cli-template/pkg/example"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -46,11 +45,11 @@ func (o *exampleOptions) run(cmd *cobra.Command, args []string) error {
 	}
 
 	if o.multiply {
-		fmt.Fprintf(cmd.OutOrStdout(), "%d", example.Multiply(values[0], values[1]))
+		fmt.Fprintf(cmd.OutOrStdout(), "%d\n", example.Multiply(values[0], values[1]))
 	}
 
 	if o.add {
-		fmt.Fprintf(cmd.OutOrStdout(), "%d", example.Add(values[0], values[1]))
+		fmt.Fprintf(cmd.OutOrStdout(), "%d\n", example.Add(values[0], values[1]))
 	}
 
 	return nil
