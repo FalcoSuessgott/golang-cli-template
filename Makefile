@@ -1,4 +1,4 @@
-.PHONY: fmtcheck fmt build lint cover test
+.PHONY: fmtcheck fmt build lint cover test deps
 
 build:
 	go build -ldflags "-X github.com/FalcoSuessgott/golang-cli-template/cmd.version=$(shell git describe --abbrev=0 --tags)" -o golang-cli-template
@@ -18,3 +18,6 @@ fmt:
 
 lint:
 	golangci-lint run -c .golang-ci.yml
+
+deps:
+	go mod tidy

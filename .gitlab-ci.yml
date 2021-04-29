@@ -17,13 +17,13 @@ lint:
 test:
     stage: test
     script:
-      - go test -v -race $(go list ./... | grep -v /vendor/) -v -coverprofile=coverage.out
+      - go test -v -race "$(go list ./... | grep -v /vendor/)" -v -coverprofile=coverage.out
       - go tool cover -func=coverage.out
 
 release:
   stage: release
   image:
-      name: goreleaser/goreleaser:latest
+      name: goreleaser/goreleaser:v0.164.0
       entrypoint: ["/bin/bash", "-c"]
   only:
     refs:
@@ -32,5 +32,5 @@ release:
     GITLAB_TOKEN: $GITLAB_TOKEN
 
   script:
-    - cd $CI_PROJECT_DIR
+    - cd "$CI_PROJECT_DIR"
     - goreleaser release --rm-dist

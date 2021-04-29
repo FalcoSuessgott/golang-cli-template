@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"testing"
 
@@ -16,14 +17,10 @@ func TestRootCommandOutput(t *testing.T) {
 	cmd.SetOut(b)
 
 	cmdErr := cmd.Execute()
-	if cmdErr != nil {
-		t.Fail()
-	}
+	require.NoError(t, cmdErr)
 
 	out, err := ioutil.ReadAll(b)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	assert.Equal(t, "golang-cli project template demo application\n\n"+cmd.UsageString(), string(out))
 	assert.Nil(t, cmdErr)
