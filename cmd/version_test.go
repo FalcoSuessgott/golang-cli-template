@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"testing"
 
@@ -21,5 +22,5 @@ func TestVersionCommand(t *testing.T) {
 	out, err := ioutil.ReadAll(b)
 	require.NoError(t, err)
 
-	assert.Equal(t, version, string(out))
+	assert.Equal(t, fmt.Sprintln(version), string(out))
 }

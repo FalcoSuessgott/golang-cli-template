@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"testing"
 
@@ -22,7 +23,7 @@ func TestExampleCommandMultiply(t *testing.T) {
 	out, err := ioutil.ReadAll(b)
 	require.NoError(t, err)
 
-	assert.Equal(t, "6", string(out))
+	assert.Equal(t, fmt.Sprintln("6"), string(out))
 }
 
 func TestExampleCommandMultiplyInvalidArgs(t *testing.T) {
@@ -49,5 +50,5 @@ func TestExampleAdd(t *testing.T) {
 	out, err := ioutil.ReadAll(b)
 	require.NoError(t, err)
 
-	assert.Equal(t, "5", string(out))
+	assert.Equal(t, fmt.Sprintln("5"), string(out))
 }
