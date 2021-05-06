@@ -8,11 +8,11 @@ This template serves as a starting point for golang commandline applications it 
 # Features
 - [goreleaser](https://goreleaser.com/) with `deb.` and `.rpm` package releasing
 - [golangci-lint](https://golangci-lint.run/) for linting and formatting
-- Golang Github Actions Stages (Linting, Testing, Releasing)
-- Gitlab CI Configuration (Linting, Testing, Releasing)
-- tested [cobra](https://cobra.dev/) setup
-- Makefile - with various useful targets (see Makefile Targets)
-- Github Pages [jekyll-theme-minimal](https://github.com/pages-themes/minimal) checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/golang-cli-template/)
+- [Github Actions](.github/worflows) Stages (Linting, Testing, Releasing)
+- [Gitlab CI](.gitlab-ci.yml) Configuration (Linting, Testing, Releasing)
+- [cobra](https://cobra.dev/) example setup including tests
+- [Makefile](Makefile) - with various useful targets (see Makefile Targets)
+- [Github Pages](_config.yml) using [jekyll-theme-minimal](https://github.com/pages-themes/minimal) (checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/)golang-cli-template/)
 
 # Project Layout
 * [assets/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/assets) => docs, images, etc
