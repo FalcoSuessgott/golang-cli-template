@@ -12,6 +12,7 @@ This template serves as a starting point for golang commandline applications it 
 - Gitlab CI Configuration (Linting, Testing, Releasing)
 - tested [cobra](https://cobra.dev/) setup
 - Makefile - with various useful targets (see Makefile Targets)
+- Github Pages [jekyll-theme-minimal](https://github.com/pages-themes/minimal) checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/golang-cli-template/)
 
 # Project Layout
 * [assets/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/assets) => docs, images, etc
