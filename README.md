@@ -57,10 +57,10 @@ Use "golang-cli-template [command] --help" for more information about a command.
 ```
 
 ```sh
-$> golang-cli-template 2 5 --add                                                
+$> golang-cli-template example 2 5 -a                                               
 7
 
-$> golang-cli-template 2 5 --multiply
+$> golang-cli-template example 2 5 -m
 10
 ```
 
