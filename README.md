@@ -1,6 +1,20 @@
 # golang-cli-template
 A general purpose project template for golang CLI applications
 
+<!--ts-->
+   * [golang-cli-template](#golang-cli-template)
+   * [Features](#features)
+   * [Project Layout](#project-layout)
+   * [How to use this template](#how-to-use-this-template)
+   * [Demo Application](#demo-application)
+   * [Makefile Targets](#makefile-targets)
+   * [Contribute](#contribute)
+   * [Ideas](#ideas)
+
+<!-- Added by: morelly_t1, at: Mon 12 Jul 2021 11:28:04 AM CEST -->
+
+<!--te-->
+
 [![Test](https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/test.yml/badge.svg)](https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/test.yml) [![golangci-lint](https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/lint.yml/badge.svg)](https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/lint.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/FalcoSuessgott/golang-cli-template)](https://goreportcard.com/report/github.com/FalcoSuessgott/golang-cli-template) [![Go Reference](https://pkg.go.dev/badge/github.com/FalcoSuessgott/golang-cli-template.svg)](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template) [![codecov](https://codecov.io/gh/FalcoSuessgott/golang-cli-template/branch/main/graph/badge.svg?token=Y5K4SID71F)](https://codecov.io/gh/FalcoSuessgott/golang-cli-template)
 
 This template serves as a starting point for golang commandline applications it is based on golang projects that I consider high quality and various other useful blog posts that helped me understanding golang better.
@@ -11,8 +25,9 @@ This template serves as a starting point for golang commandline applications it 
 - [Github Actions](.github/worflows) Stages (Linting, Testing, Releasing)
 - [Gitlab CI](.gitlab-ci.yml) Configuration (Linting, Testing, Releasing)
 - [cobra](https://cobra.dev/) example setup including tests
-- [Makefile](Makefile) - with various useful targets (see Makefile Targets)
+- [Makefile](Makefile) - with various useful targets and documentation (see Makefile Targets)
 - [Github Pages](_config.yml) using [jekyll-theme-minimal](https://github.com/pages-themes/minimal) (checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/)golang-cli-template/)
+- [pre-commit-hooks](https://pre-commit.com/) for formatting and validating code before committing
 
 # Project Layout
 * [assets/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/assets) => docs, images, etc
@@ -22,23 +37,13 @@ This template serves as a starting point for golang commandline applications it 
 
 # How to use this template
 ```sh
-GITHUB_USER="my-github-user"
-PROJECT="new-golang-project"
-git clone git@github.com:FalcoSuessgott/golang-cli-template.git "$PROJECT"
-cd "$PROJECT"
-rm -rf .git
-find . -type f -exec sed -i "s/FalcoSuessgott\/golang-cli-template/$GITHUB_USER\/$PROJECT/g" {} +
-make fmt
-git init
-git add .
-git commit -m "initial commit"
-git remote add origin "git@github.com:$GITHUB_USER/$PROJECT.git"
+bash <(curl -s https://raw.githubusercontent.com/FalcoSuessgott/golang-cli-template/main/install.sh)
 ```
 
 # Demo Application
 
 ```sh
-$> golang-cli-template                                                  
+$> golang-cli-template
 golang-cli project template demo application
 
 Usage:
@@ -57,7 +62,7 @@ Use "golang-cli-template [command] --help" for more information about a command.
 ```
 
 ```sh
-$> golang-cli-template 2 5 --add                                                
+$> golang-cli-template 2 5 --add
 7
 
 $> golang-cli-template 2 5 --multiply
@@ -65,39 +70,16 @@ $> golang-cli-template 2 5 --multiply
 ```
 
 # Makefile Targets
-
-## lint
-```sh
-make lint
 ```
-
-## format
-```sh
-make fmt
-```
-
-## formatcheck
-```sh
-make fmtcheck
-```
-
-## deps
-```sh
-make deps
-```
-## build
-```sh
-make build
-```
-
-## test
-```sh
-make test
-```
-
-## cover
-```sh
-make cover
+$> make
+build                          build golang binary
+cover                          display test coverage
+deps                           clean go.mod
+fmtcheck                       run gofmt and print detected files
+fmt                            format go files
+help                           list makefile targets
+lint-fix                       fix
+lint                           lint go files
 ```
 
 # Contribute

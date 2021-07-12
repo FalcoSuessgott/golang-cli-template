@@ -10,7 +10,7 @@ import (
 )
 
 func TestRootCommandOutput(t *testing.T) {
-	cmd := newRootCmd()
+	cmd := newRootCmd("v1.0.0")
 	b := bytes.NewBufferString("")
 
 	cmd.SetArgs([]string{"-h"})

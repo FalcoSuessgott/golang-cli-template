@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func newVersionCmd() *cobra.Command {
+func newVersionCmd(version string) *cobra.Command {
 	return &cobra.Command{
 		Use:          "version",
 		Short:        "Displays d4sva binary version",
