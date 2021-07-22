@@ -19,4 +19,6 @@ vendor/
 coverage.out
 
 # goreleaser
-/dist 
+/dist
+
+.envrc

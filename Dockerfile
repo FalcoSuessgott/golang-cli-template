@@ -8,6 +8,6 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -ldflags "-X github.com/FalcoSuessgott/golang-cli-template/cmd.version=1.0.0" -o golang-cli-template
+RUN go build -ldflags "-X main.version=1.0.0" -o golang-cli-template
 
 CMD [ "./golang-cli-template" ]

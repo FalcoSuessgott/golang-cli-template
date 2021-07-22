@@ -31,7 +31,7 @@ archives:
 
 nfpms:
   -
-    vendor: d4sva
+    vendor: golang-cli-template
     homepage:  https://github.com/FalcoSuessgott/golang-cli-template
     maintainer: "Tom Morelly <tom-morelly@gmx.de"
     description: "A general purpose golang CLI template for Github and Gitlab"
@@ -42,11 +42,6 @@ nfpms:
       - rpm
     bindir: /usr/local/bin
 
-dockers:
-  - image_templates:
-    - falcosuessgott/{{ .ProjectName }}:{{ .Tag }}
-    - falcosuessgott/{{ .ProjectName }}:latest
-
 checksum:
   name_template: "checksums.txt"
 
@@ -55,3 +50,4 @@ changelog:
   filters:
     exclude:
       - "^assets:"
+      - "^scripts:"

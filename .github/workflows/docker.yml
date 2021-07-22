@@ -3,7 +3,9 @@ name: docker
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
+    tags:
+      - '*'
 
 jobs:
   docker:
@@ -30,4 +32,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: user/app:latest
+          tags: falcosuessgott/golang-cli-template:latest
