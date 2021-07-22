@@ -7,8 +7,10 @@ import (
 	"github.com/FalcoSuessgott/golang-cli-template/cmd"
 )
 
+var version = ""
+
 func main() {
-	if err := cmd.Execute(); err != nil {
+	if err := cmd.Execute(version); err != nil {
 		fmt.Fprintf(os.Stderr, "%v", err)
 		os.Exit(1)
 	}

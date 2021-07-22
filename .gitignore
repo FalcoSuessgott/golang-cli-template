@@ -1,6 +1,5 @@
 golang-cli-template
 /.idea
-
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -18,3 +17,6 @@ golang-cli-template
 vendor/
 
 coverage.out
+
+# goreleaser
+/dist 
