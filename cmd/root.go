@@ -12,6 +12,7 @@ func newRootCmd(version string) *cobra.Command {
 		Short: "golang-cli project template demo application",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			fmt.Println(cmd.UsageString())
+
 			return nil
 		},
 	}
@@ -24,5 +25,9 @@ func newRootCmd(version string) *cobra.Command {
 
 // Execute invokes the command.
 func Execute(version string) error {
-	return newRootCmd(version).Execute()
+	if err := newRootCmd(version).Execute(); err != nil {
+		return fmt.Errorf("error executing root command: %w", err)
+	}
+
+	return nil
 }

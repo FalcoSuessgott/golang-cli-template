@@ -9,9 +9,8 @@ A general purpose project template for golang CLI applications
    * [Demo Application](#demo-application)
    * [Makefile Targets](#makefile-targets)
    * [Contribute](#contribute)
-   * [Ideas](#ideas)
 
-<!-- Added by: morelly_t1, at: Mon 12 Jul 2021 11:28:04 AM CEST -->
+<!-- Added by: morelly_t1, at: Tue 10 Aug 2021 08:54:24 AM CEST -->
 
 <!--te-->
 
@@ -22,11 +21,11 @@ This template serves as a starting point for golang commandline applications it 
 # Features
 - [goreleaser](https://goreleaser.com/) with `deb.` and `.rpm` package releasing
 - [golangci-lint](https://golangci-lint.run/) for linting and formatting
-- [Github Actions](.github/worflows) Stages (Linting, Testing, Releasing)
-- [Gitlab CI](.gitlab-ci.yml) Configuration (Linting, Testing, Releasing)
+- [Github Actions](.github/worflows) Stages (Lint, Test, Build, Release)
+- [Gitlab CI](.gitlab-ci.yml) Configuration (Lint, Test, Build, Release)
 - [cobra](https://cobra.dev/) example setup including tests
 - [Makefile](Makefile) - with various useful targets and documentation (see Makefile Targets)
-- [Github Pages](_config.yml) using [jekyll-theme-minimal](https://github.com/pages-themes/minimal) (checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/)golang-cli-template/)
+- [Github Pages](_config.yml) using [jekyll-theme-minimal](https://github.com/pages-themes/minimal) (checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/golang-cli-template/))
 - [pre-commit-hooks](https://pre-commit.com/) for formatting and validating code before committing
 
 # Project Layout
@@ -62,7 +61,7 @@ Use "golang-cli-template [command] --help" for more information about a command.
 ```
 
 ```sh
-$> golang-cli-template example 2 5 -a                                               
+$> golang-cli-template example 2 5 -a
 7
 
 $> golang-cli-template example 2 5 -m
@@ -70,22 +69,22 @@ $> golang-cli-template example 2 5 -m
 ```
 
 # Makefile Targets
-```
+```sh
 $> make
 build                          build golang binary
+clean                          clean up environment
 cover                          display test coverage
-deps                           clean go.mod
+docker-build                   dockerize golang application
 fmtcheck                       run gofmt and print detected files
 fmt                            format go files
 help                           list makefile targets
+install                        install golang binary
 lint-fix                       fix
 lint                           lint go files
+pre-commit                     run pre-commit hooks
+run                            run the app
+test                           run go tests
 ```
 
 # Contribute
 If you find issues in that setup or have some nice features / improvements, I would welcome an issue or a PR :)
-
-
-# Ideas
-- [ ] implement a `create` subcommand that preconfigures this project setup and all its dependencies
-- [ ] introduce viper config examples
