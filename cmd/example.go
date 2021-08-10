@@ -56,12 +56,12 @@ func (o *exampleOptions) run(cmd *cobra.Command, args []string) error {
 }
 
 func (o *exampleOptions) parseArgs(args []string) ([]int, error) {
-	values := make([]int, 2)
+	values := make([]int, 2) //nolint: gomnd
 
 	for i, a := range args {
 		v, err := convert.ToInteger(a)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error converting to integer: %w", err)
 		}
 
 		values[i] = v

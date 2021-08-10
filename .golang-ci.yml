@@ -5,3 +5,6 @@ linters:
   enable-all: true
   disable:
     - testpackage
+    - forbidigo
+    - paralleltest
+    - exhaustivestruct
