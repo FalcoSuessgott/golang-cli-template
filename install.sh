@@ -8,7 +8,8 @@ read -rp "Projectname: " projectname
 git clone git@github.com:FalcoSuessgott/golang-cli-template.git "$projectname"
 cd "$projectname"
 rm -rf .git
-find . -type f -exec sed -i "s/FalcoSuessgott\/golang-cli-template/$user\/$projectname/g" {} +
+find . -type f -exec sed -i "s/golang-cli-template/$projectname/g" {} +
+find . -type f -exec sed -i "s/FalcoSuessgott/$user/g" {} +
 git init
 git add .
 git commit -m "initial commit"
