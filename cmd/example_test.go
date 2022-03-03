@@ -2,53 +2,59 @@ package cmd
 
 import (
 	"bytes"
-	"fmt"
 	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
-func TestExampleCommandMultiply(t *testing.T) {
-	cmd := newExampleCmd()
-	b := bytes.NewBufferString("")
+func TestExampleCommand(t *testing.T) {
+	testCases := []struct {
+		name     string
+		args     []string
+		expected string
+		err      bool
+	}{
+		{
+			name:     "normal multiply",
+			args:     []string{"2", "3", "--multiply"},
+			expected: "6\n",
+			err:      false,
+		},
+		{
+			name:     "invalid multiply",
+			args:     []string{"2", "s", "--multiply"},
+			expected: "",
+			err:      true,
+		},
+		{
+			name:     "valid add",
+			args:     []string{"2", "3", "-a"},
+			expected: "5\n",
+			err:      false,
+		},
+		{
+			name:     "invalid add",
+			args:     []string{"s", "3", "-a"},
+			expected: "",
+			err:      true,
+		},
+	}
 
-	cmd.SetArgs([]string{"2", "3", "--multiply"})
-	cmd.SetOut(b)
+	for _, tc := range testCases {
+		cmd := newExampleCmd()
+		b := bytes.NewBufferString("")
 
-	err := cmd.Execute()
-	require.NoError(t, err)
+		cmd.SetArgs(tc.args)
+		cmd.SetOut(b)
 
-	out, err := ioutil.ReadAll(b)
-	require.NoError(t, err)
+		err := cmd.Execute()
+		out, _ := ioutil.ReadAll(b)
 
-	assert.Equal(t, fmt.Sprintln("6"), string(out))
-}
-
-func TestExampleCommandMultiplyInvalidArgs(t *testing.T) {
-	cmd := newExampleCmd()
-	b := bytes.NewBufferString("")
-
-	cmd.SetArgs([]string{"2", "s", "--multiply"})
-	cmd.SetOut(b)
-
-	err := cmd.Execute()
-	assert.Error(t, err)
-}
-
-func TestExampleAdd(t *testing.T) {
-	cmd := newExampleCmd()
-	b := bytes.NewBufferString("")
-
-	cmd.SetArgs([]string{"2", "3", "-a"})
-	cmd.SetOut(b)
-
-	err := cmd.Execute()
-	require.NoError(t, err)
-
-	out, err := ioutil.ReadAll(b)
-	require.NoError(t, err)
-
-	assert.Equal(t, fmt.Sprintln("5"), string(out))
+		if tc.err {
+			assert.Error(t, err, tc.name)
+		} else {
+			assert.Equal(t, tc.expected, string(out), tc.name)
+		}
+	}
 }

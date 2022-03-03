@@ -27,6 +27,7 @@ This template serves as a starting point for golang commandline applications it 
 - [Makefile](Makefile) - with various useful targets and documentation (see Makefile Targets)
 - [Github Pages](_config.yml) using [jekyll-theme-minimal](https://github.com/pages-themes/minimal) (checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/golang-cli-template/))
 - [pre-commit-hooks](https://pre-commit.com/) for formatting and validating code before committing
+- [semantic-releaser](https://semantic-release.gitbook.io/semantic-release/)
 
 # Project Layout
 * [assets/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/assets) => docs, images, etc

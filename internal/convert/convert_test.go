@@ -6,13 +6,38 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestValidInteger(t *testing.T) {
-	i, ok := ToInteger("2")
-	assert.Equal(t, 2, i)
-	assert.Nil(t, ok, "expect error to be nil")
-}
+func TestToInteger(t *testing.T) {
+	testCases := []struct {
+		name     string
+		input    interface{}
+		expected int
+		err      bool
+	}{
+		{
+			name:     "valid int",
+			input:    1,
+			expected: 1,
+			err:      false,
+		},
+		{
+			name:  "invalid string",
+			input: "1",
+			err:   true,
+		},
+		{
+			name:  "invalid bool",
+			input: false,
+			err:   true,
+		},
+	}
 
-func TestInValidIntegers(t *testing.T) {
-	_, ok := ToInteger("string")
-	assert.Error(t, ok)
+	for _, tc := range testCases {
+		res, err := ToInteger(tc.input)
+
+		if tc.err {
+			assert.Error(t, errConversionError(tc.input), err)
+		} else {
+			assert.Equal(t, tc.expected, res)
+		}
+	}
 }
