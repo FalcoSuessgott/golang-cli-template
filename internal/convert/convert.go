@@ -12,7 +12,7 @@ var errConversionError = func(v interface{}) error {
 
 // ToInteger converts given value to integer.
 func ToInteger(v interface{}) (int, error) {
-	i, err := strconv.Atoi(v.(string))
+	i, err := strconv.Atoi(fmt.Sprintf("%v", v))
 	if err != nil {
 		return i, errConversionError(v)
 	}
