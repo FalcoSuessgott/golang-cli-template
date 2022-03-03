@@ -8,3 +8,8 @@ linters:
     - forbidigo
     - paralleltest
     - exhaustivestruct
+    - varnamelen
+    - interfacer
+    - maligned
+    - scopelint
+    - golint
