@@ -16,11 +16,13 @@ Removed in this fork:
  * `deb`, `rpm`, `apk`
  * Pre-commit checks
  * Codecov
+ * Dropped `testify` dependency
+ * Replace `cobra` (~300 indirect dependencies!), with [`subcommands`](https://pkg.go.dev/github.com/google/subcommands)
 
 Modified:
 
  * Makefile
+ * Subcommands and tests
 
 Loose ends:
  * Dig into linting and coverage settings
- * Replace Cobra with Subcommand

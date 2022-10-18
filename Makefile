@@ -20,7 +20,7 @@ clean:
 	@rm -rf coverage.out dist/ $(projectname)
 
 cover:
-	@go test -v -race $(shell go list ./... | grep -v /vendor/) -v -coverprofile=coverage.out
+	@go test -race $(shell go list ./... | grep -v /vendor/) -v -coverprofile=coverage.out
 	@go tool cover -func=coverage.out
 
 fmt:

@@ -1,7 +1,6 @@
 package example
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -26,29 +25,27 @@ func TestSum(t *testing.T) {
 		},
 	}
 
-	for _, tc := range testCases {
+	for i, tc := range testCases {
 		add := Add(tc.a, tc.b)
 		multiply := Multiply(tc.a, tc.b)
 
 		if tc.expectedAdd != add {
-			t.Error(
-				fmt.Sprintf(
-					"Expected %d+%d=%d, got %d",
-					tc.a,
-					tc.b,
-					tc.expectedAdd,
-					add,
-				),
+			t.Errorf(
+				"[%d] Expected %d+%d=%d, got %d",
+				i,
+				tc.a,
+				tc.b,
+				tc.expectedAdd,
+				add,
 			)
 		} else if tc.expectedMultiply != multiply {
-			t.Error(
-				fmt.Sprintf(
-					"Expected %d*%d=%d, got %d",
-					tc.a,
-					tc.b,
-					tc.expectedMultiply,
-					multiply,
-				),
+			t.Errorf(
+				"[%d], Expected %d*%d=%d, got %d",
+				i,
+				tc.a,
+				tc.b,
+				tc.expectedMultiply,
+				multiply,
 			)
 		}
 	}

@@ -3,7 +3,6 @@ package cmd
 import (
 	"context"
 	"flag"
-	"fmt"
 	"github.com/google/subcommands"
 	"testing"
 )
@@ -22,25 +21,32 @@ func TestVersionCommand(t *testing.T) {
 		{true, "", []string{}, subcommands.ExitFailure},
 	}
 
-	for _, tc := range testCases {
+	for i, tc := range testCases {
 
 		opts := rootOptions{
 			version: tc.version,
 			verbose: tc.verbose,
 		}
 		fs := flag.NewFlagSet("test", flag.ContinueOnError)
-		fs.Parse(tc.arguments)
 
-		exitStatus := versionCommand(&opts).Execute(context.Background(), fs)
+		command := versionCommand(&opts)
+
+		command.SetFlags(fs)
+
+		err := fs.Parse(tc.arguments)
+		if err != nil {
+			t.Logf("[%d] Ignoring argument parsing error: %v", i, err)
+		}
+
+		exitStatus := command.Execute(context.Background(), fs)
 
 		if exitStatus != tc.expectedExitStatus {
-			t.Error(
-				fmt.Sprintf(
-					"Args: %v, expected: %v, got: %v\n",
-					tc.arguments,
-					tc.expectedExitStatus,
-					exitStatus,
-				),
+			t.Errorf(
+				"[%d], Args: %v, expected: %v, got: %v\n",
+				i,
+				tc.arguments,
+				tc.expectedExitStatus,
+				exitStatus,
 			)
 		}
 	}

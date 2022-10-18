@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -24,16 +23,15 @@ func TestRun(t *testing.T) {
 		{[]string{"example", "-m", "0", "0"}, 0},
 	}
 
-	for _, tc := range testCases {
+	for i, tc := range testCases {
 		exitCode := Run("test", "v", tc.arguments)
 		if exitCode != tc.expectedExitCode {
-			t.Error(
-				fmt.Sprintf(
-					"Args: %v expected: %d, got: %d",
-					tc.arguments,
-					tc.expectedExitCode,
-					exitCode,
-				),
+			t.Errorf(
+				"[%d] Args: %v expected: %d, got: %d",
+				i,
+				tc.arguments,
+				tc.expectedExitCode,
+				exitCode,
 			)
 		}
 	}

@@ -3,7 +3,6 @@ package cmd
 import (
 	"context"
 	"flag"
-	"fmt"
 	"github.com/google/subcommands"
 	"testing"
 )
@@ -28,7 +27,7 @@ func TestExampleCommand(t *testing.T) {
 		verbose: false,
 	}
 
-	for _, tc := range testCases {
+	for i, tc := range testCases {
 
 		command := exampleCommand(&opts)
 
@@ -36,18 +35,20 @@ func TestExampleCommand(t *testing.T) {
 
 		command.SetFlags(fs)
 
-		fs.Parse(tc.arguments)
+		err := fs.Parse(tc.arguments)
+		if err != nil {
+			t.Logf("[%d] Ignoring argument parsing error: %v", i, err)
+		}
 
 		exitStatus := command.Execute(context.Background(), fs)
 
 		if exitStatus != tc.expectedExitStatus {
-			t.Error(
-				fmt.Sprintf(
-					"Args: %v, expected: %v, got: %v\n",
-					tc.arguments,
-					tc.expectedExitStatus,
-					exitStatus,
-				),
+			t.Errorf(
+				"[%d] Args: %v, expected: %v, got: %v\n",
+				i,
+				tc.arguments,
+				tc.expectedExitStatus,
+				exitStatus,
 			)
 		}
 	}
