@@ -23,8 +23,5 @@ jobs:
       - name: go get
         run: go get ./...
 
-      - name: go mod tidy
-        run: go mod tidy
-
       - name: Run coverage
         run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
