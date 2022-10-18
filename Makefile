@@ -2,7 +2,7 @@ projectname?=golang-cli-template
 
 default: build
 
-.PHONY: build install run test clean cover fmt lint
+.PHONY: build install run test clean cover fmt lint mod check
 
 build:
 	@go build -ldflags "-X main.version=dev" -o $(projectname)
@@ -28,3 +28,8 @@ fmt:
 
 lint: # Depends on https://github.com/golangci/golangci-lint
 	@golangci-lint run -c .golangci-lint.yml --fix
+
+mod:
+	@go mod tidy
+
+check: mod fmt test lint cover
