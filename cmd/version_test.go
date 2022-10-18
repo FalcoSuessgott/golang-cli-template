@@ -1,26 +1,47 @@
 package cmd
 
 import (
-	"bytes"
+	"context"
+	"flag"
 	"fmt"
-	"io/ioutil"
+	"github.com/google/subcommands"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func TestVersionCommand(t *testing.T) {
-	version := "v1.0.0"
-	cmd := newVersionCmd(version)
-	b := bytes.NewBufferString("")
-	cmd.SetOut(b)
 
-	err := cmd.Execute()
-	require.NoError(t, err)
+	testCases := []struct {
+		verbose            bool
+		version            string
+		arguments          []string
+		expectedExitStatus subcommands.ExitStatus
+	}{
+		{false, "test", []string{}, subcommands.ExitSuccess},
+		{true, "test", []string{}, subcommands.ExitSuccess},
+		{true, "test", []string{"blah"}, subcommands.ExitSuccess},
+		{true, "", []string{}, subcommands.ExitFailure},
+	}
 
-	out, err := ioutil.ReadAll(b)
-	require.NoError(t, err)
+	for _, tc := range testCases {
 
-	assert.Equal(t, fmt.Sprintln(version), string(out))
+		opts := rootOptions{
+			version: tc.version,
+			verbose: tc.verbose,
+		}
+		fs := flag.NewFlagSet("test", flag.ContinueOnError)
+		fs.Parse(tc.arguments)
+
+		exitStatus := versionCommand(&opts).Execute(context.Background(), fs)
+
+		if exitStatus != tc.expectedExitStatus {
+			t.Error(
+				fmt.Sprintf(
+					"Args: %v, expected: %v, got: %v\n",
+					tc.arguments,
+					tc.expectedExitStatus,
+					exitStatus,
+				),
+			)
+		}
+	}
 }

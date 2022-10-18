@@ -1,27 +1,40 @@
 package cmd
 
 import (
-	"bytes"
-	"io/ioutil"
+	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
-func TestRootCommandOutput(t *testing.T) {
-	cmd := newRootCmd("v1.0.0")
-	b := bytes.NewBufferString("")
+func TestRun(t *testing.T) {
 
-	cmd.SetArgs([]string{"-h"})
-	cmd.SetOut(b)
+	testCases := []struct {
+		arguments        []string
+		expectedExitCode int
+	}{
+		// Usage errors
+		{[]string{}, 2},
+		{[]string{"blah"}, 2},
+		// Valid
+		{[]string{"commands"}, 0},
+		{[]string{"flags"}, 0},
+		{[]string{"help"}, 0},
+		{[]string{"help", "version"}, 0},
+		{[]string{"help", "example"}, 0},
+		{[]string{"-v", "version"}, 0},
+		{[]string{"example", "-m", "0", "0"}, 0},
+	}
 
-	cmdErr := cmd.Execute()
-	require.NoError(t, cmdErr)
-
-	out, err := ioutil.ReadAll(b)
-	require.NoError(t, err)
-
-	assert.Equal(t, "golang-cli project template demo application\n\n"+cmd.UsageString(), string(out))
-	assert.Nil(t, cmdErr)
+	for _, tc := range testCases {
+		exitCode := Run("test", "v", tc.arguments)
+		if exitCode != tc.expectedExitCode {
+			t.Error(
+				fmt.Sprintf(
+					"Args: %v expected: %d, got: %d",
+					tc.arguments,
+					tc.expectedExitCode,
+					exitCode,
+				),
+			)
+		}
+	}
 }

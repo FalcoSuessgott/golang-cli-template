@@ -1,60 +1,54 @@
 package cmd
 
 import (
-	"bytes"
-	"io/ioutil"
+	"context"
+	"flag"
+	"fmt"
+	"github.com/google/subcommands"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestExampleCommand(t *testing.T) {
+
 	testCases := []struct {
-		name     string
-		args     []string
-		expected string
-		err      bool
+		arguments          []string
+		expectedExitStatus subcommands.ExitStatus
 	}{
-		{
-			name:     "normal multiply",
-			args:     []string{"2", "3", "--multiply"},
-			expected: "6\n",
-			err:      false,
-		},
-		{
-			name:     "invalid multiply",
-			args:     []string{"2", "s", "--multiply"},
-			expected: "",
-			err:      true,
-		},
-		{
-			name:     "valid add",
-			args:     []string{"2", "3", "-a"},
-			expected: "5\n",
-			err:      false,
-		},
-		{
-			name:     "invalid add",
-			args:     []string{"s", "3", "-a"},
-			expected: "",
-			err:      true,
-		},
+		{[]string{"-m", "1", "2"}, subcommands.ExitSuccess},
+		{[]string{"-a", "1", "2"}, subcommands.ExitSuccess},
+		{[]string{}, subcommands.ExitUsageError},
+		{[]string{"1", "2"}, subcommands.ExitUsageError},
+		{[]string{"-x", "1", "2"}, subcommands.ExitUsageError},
+		{[]string{"-m", "1", "2", "3"}, subcommands.ExitUsageError},
+		{[]string{"-m", "foo", "bar"}, subcommands.ExitUsageError},
+	}
+
+	opts := rootOptions{
+		version: "dev",
+		verbose: false,
 	}
 
 	for _, tc := range testCases {
-		cmd := newExampleCmd()
-		b := bytes.NewBufferString("")
 
-		cmd.SetArgs(tc.args)
-		cmd.SetOut(b)
+		command := exampleCommand(&opts)
 
-		err := cmd.Execute()
-		out, _ := ioutil.ReadAll(b)
+		fs := flag.NewFlagSet("test", flag.ContinueOnError)
 
-		if tc.err {
-			assert.Error(t, err, tc.name)
-		} else {
-			assert.Equal(t, tc.expected, string(out), tc.name)
+		command.SetFlags(fs)
+
+		fs.Parse(tc.arguments)
+
+		exitStatus := command.Execute(context.Background(), fs)
+
+		if exitStatus != tc.expectedExitStatus {
+			t.Error(
+				fmt.Sprintf(
+					"Args: %v, expected: %v, got: %v\n",
+					tc.arguments,
+					tc.expectedExitStatus,
+					exitStatus,
+				),
+			)
 		}
 	}
 }

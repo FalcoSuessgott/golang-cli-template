@@ -1,71 +1,74 @@
 package cmd
 
 import (
+	"context"
+	"flag"
 	"fmt"
+	"log"
 
+	"github.com/google/subcommands"
 	"github.com/mprimi/golang-cli-template/internal/convert"
 	"github.com/mprimi/golang-cli-template/pkg/example"
-	"github.com/spf13/cobra"
 )
 
-const (
-	numberOfArgs = 2
-)
-
-type exampleOptions struct {
+type exampleCmd struct {
+	rootOpts *rootOptions
 	multiply bool
 	add      bool
 }
 
-func defaultExampleOptions() *exampleOptions {
-	return &exampleOptions{}
+func exampleCommand(rootOpts *rootOptions) subcommands.Command {
+	return &exampleCmd{
+		rootOpts: rootOpts,
+	}
 }
 
-func newExampleCmd() *cobra.Command {
-	o := defaultExampleOptions()
+func (_ *exampleCmd) Name() string { return "example" }
 
-	cmd := &cobra.Command{
-		Use:          "example",
-		Short:        "example subcommand which adds or multiplies two given integers",
-		SilenceUsage: true,
-		Args:         cobra.ExactArgs(numberOfArgs),
-		RunE:         o.run,
-	}
+func (_ *exampleCmd) Synopsis() string { return "Example add/subtract" }
 
-	cmd.Flags().BoolVarP(&o.multiply, "multiply", "m", o.multiply, "multiply")
-	cmd.Flags().BoolVarP(&o.add, "add", "a", o.add, "add")
+func (_ *exampleCmd) Usage() string { return "example (-a|-m) number number\n" }
 
-	return cmd
+func (cmd *exampleCmd) SetFlags(f *flag.FlagSet) {
+	f.BoolVar(&cmd.multiply, "m", false, "multiply")
+	f.BoolVar(&cmd.add, "a", false, "add")
 }
 
-func (o *exampleOptions) run(cmd *cobra.Command, args []string) error {
-	values, err := o.parseArgs(args)
-	if err != nil {
-		return err
+func (cmd *exampleCmd) Execute(_ context.Context, f *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
+
+	const (
+		numberOfArgs = 2
+	)
+
+	if cmd.rootOpts.verbose {
+		fmt.Printf("Args: %v\n", f.Args())
 	}
 
-	if o.multiply {
-		fmt.Fprintf(cmd.OutOrStdout(), "%d\n", example.Multiply(values[0], values[1]))
+	if len(f.Args()) != numberOfArgs {
+		log.Printf("Takes two arguments\n")
+		return subcommands.ExitUsageError
 	}
 
-	if o.add {
-		fmt.Fprintf(cmd.OutOrStdout(), "%d\n", example.Add(values[0], values[1]))
+	if cmd.add == cmd.multiply { // XOR
+		log.Printf("Must select add or multiply\n")
+		return subcommands.ExitUsageError
 	}
 
-	return nil
-}
-
-func (o *exampleOptions) parseArgs(args []string) ([]int, error) {
-	values := make([]int, 2) //nolint: gomnd
-
-	for i, a := range args {
+	values := make([]int, numberOfArgs)
+	for i, a := range f.Args() {
 		v, err := convert.ToInteger(a)
 		if err != nil {
-			return nil, fmt.Errorf("error converting to integer: %w", err)
+			log.Printf("Invalid number: %s\n", a)
+			return subcommands.ExitUsageError
 		}
-
 		values[i] = v
 	}
 
-	return values, nil
+	if cmd.multiply {
+		fmt.Printf("%d\n", example.Multiply(values[0], values[1]))
+	} else if cmd.add {
+		fmt.Printf("%d\n", example.Add(values[0], values[1]))
+	}
+
+	return subcommands.ExitSuccess
 }

@@ -1,9 +1,8 @@
 package convert
 
 import (
+	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestToInteger(t *testing.T) {
@@ -15,13 +14,19 @@ func TestToInteger(t *testing.T) {
 	}{
 		{
 			name:     "valid int",
-			input:    1,
-			expected: 1,
+			input:    123,
+			expected: 123,
+			err:      false,
+		},
+		{
+			name:     "valid string",
+			input:    "123",
+			expected: 123,
 			err:      false,
 		},
 		{
 			name:  "invalid string",
-			input: "1",
+			input: "foo",
 			err:   true,
 		},
 		{
@@ -31,13 +36,27 @@ func TestToInteger(t *testing.T) {
 		},
 	}
 
-	for _, tc := range testCases {
+	for i, tc := range testCases {
 		res, err := ToInteger(tc.input)
 
-		if tc.err {
-			assert.Error(t, errConversionError(tc.input), err)
-		} else {
-			assert.Equal(t, tc.expected, res)
+		if tc.err != (err != nil) {
+			t.Error(
+				fmt.Sprintf(
+					"[%d] Convert '%v', expected error: %v, got error: %v",
+					i,
+					tc.input,
+					tc.err,
+					(err != nil),
+				),
+			)
+		} else if err == nil && tc.expected != res {
+			fmt.Sprintf(
+				"[%d] Convert '%v', expected: %d, got: %d",
+				i,
+				tc.input,
+				tc.expected,
+				res,
+			)
 		}
 	}
 }

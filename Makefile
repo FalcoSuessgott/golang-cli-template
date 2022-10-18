@@ -14,7 +14,7 @@ run:
 	@go run -ldflags "-X main.version=dev"  main.go
 
 test:
-	@go test -v ./...
+	@go test -v -count=1 ./...
 
 clean:
 	@rm -rf coverage.out dist/ $(projectname)

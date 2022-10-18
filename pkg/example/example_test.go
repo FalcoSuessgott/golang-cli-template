@@ -1,59 +1,55 @@
 package example
 
 import (
+	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestSum(t *testing.T) {
 	testCases := []struct {
-		name     string
-		a        int
-		b        int
-		expected int
+		a                int
+		b                int
+		expectedAdd      int
+		expectedMultiply int
 	}{
 		{
-			name:     "",
-			a:        1,
-			b:        2,
-			expected: 3,
+			a:                1,
+			b:                2,
+			expectedAdd:      3,
+			expectedMultiply: 2,
 		},
 		{
-			name:     "",
-			a:        2,
-			b:        2,
-			expected: 4,
+			a:                2,
+			b:                2,
+			expectedAdd:      4,
+			expectedMultiply: 4,
 		},
 	}
 
 	for _, tc := range testCases {
-		assert.Equal(t, tc.expected, Add(tc.a, tc.b))
-	}
-}
+		add := Add(tc.a, tc.b)
+		multiply := Multiply(tc.a, tc.b)
 
-func TestMultiply(t *testing.T) {
-	testCases := []struct {
-		name     string
-		a        int
-		b        int
-		expected int
-	}{
-		{
-			name:     "",
-			a:        1,
-			b:        2,
-			expected: 2,
-		},
-		{
-			name:     "",
-			a:        2,
-			b:        2,
-			expected: 4,
-		},
-	}
-
-	for _, tc := range testCases {
-		assert.Equal(t, tc.expected, Multiply(tc.a, tc.b))
+		if tc.expectedAdd != add {
+			t.Error(
+				fmt.Sprintf(
+					"Expected %d+%d=%d, got %d",
+					tc.a,
+					tc.b,
+					tc.expectedAdd,
+					add,
+				),
+			)
+		} else if tc.expectedMultiply != multiply {
+			t.Error(
+				fmt.Sprintf(
+					"Expected %d*%d=%d, got %d",
+					tc.a,
+					tc.b,
+					tc.expectedMultiply,
+					multiply,
+				),
+			)
+		}
 	}
 }
