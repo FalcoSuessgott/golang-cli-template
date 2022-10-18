@@ -1,6 +1,6 @@
  > This is Marco's fork of:
 
-# [golang-cli-template](https://github.com/FalcoSuessgott/golang-cli-template)
+# [golang-cli-template](https://github.com/mprimi/golang-cli-template)
 A general purpose project template for golang CLI applications
 
 The upstream version has a lot of nice features. This is a stripped down version for personal use.
@@ -20,3 +20,7 @@ Removed in this fork:
 Modified:
 
  * Makefile
+
+Loose ends:
+ * Dig into linting and coverage settings
+ * Replace Cobra with Subcommand

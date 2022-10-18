@@ -1,0 +1,6 @@
+linters-settings:
+  lll:
+    line-length: 130
+
+# See https://golangci-lint.run/usage/linters for more
+linters:

@@ -1,6 +1,6 @@
 name: golangci-lint
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   golangci:
@@ -12,4 +12,4 @@ jobs:
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.43.0
-          args: -c .golang-ci.yml
+          args: -c .golangci-lint.yml
