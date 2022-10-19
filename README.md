@@ -26,3 +26,15 @@ Modified:
 
 Loose ends:
  * Dig into linting and coverage settings
+ * Move main from top-level directory into `cmd/<name>`, [example](https://github.com/golangci/golangci-lint/tree/master/cmd/golangci-lint)
+
+# Install from source:
+
+```
+go install github.com/mprimi/golang-cli-template@vX.Y.Z
+```
+
+Assuming `$GOPATH/bin` is in `$PATH`, run with
+```
+golang-cli-template
+```
