@@ -11,8 +11,11 @@ import (
 
 type rootOptions struct {
 	// Build-time properties
-	name    string
-	version string
+	name      string
+	version   string
+	sha       string
+	buildDate string
+
 	// Top-level options
 	verbose bool
 }
@@ -55,10 +58,12 @@ func (mc *metaCommand) Execute(_ context.Context, f *flag.FlagSet, args ...inter
 }
 
 // Entry point
-func Run(name, version string, args []string) int {
+func Run(name, version, sha, buildDate string, args []string) int {
 	var rootOps = rootOptions{
-		name:    name,
-		version: version,
+		name:      name,
+		version:   version,
+		sha:       sha,
+		buildDate: buildDate,
 	}
 
 	rootFs := flag.NewFlagSet("", flag.ExitOnError)

@@ -26,7 +26,13 @@ func versionCommand() subcommands.Command {
 					return fmt.Errorf("Version not set")
 				}
 
-				fmt.Printf("%s\n", rootOpts.version)
+				fmt.Printf(
+					"%s version:%s (%s) (built: %s)\n",
+					rootOpts.name,
+					rootOpts.version,
+					rootOpts.sha,
+					rootOpts.buildDate,
+				)
 				return nil
 			},
 		},
