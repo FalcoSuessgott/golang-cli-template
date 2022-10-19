@@ -4,7 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log"
+	"os"
 
 	"github.com/google/subcommands"
 	"github.com/mprimi/golang-cli-template/internal/convert"
@@ -12,63 +12,58 @@ import (
 )
 
 type exampleCmd struct {
-	rootOpts *rootOptions
+	metaCommand
 	multiply bool
 	add      bool
 }
 
-func exampleCommand(rootOpts *rootOptions) subcommands.Command {
+func exampleCommand() subcommands.Command {
 	return &exampleCmd{
-		rootOpts: rootOpts,
+		metaCommand: metaCommand{
+			name:     "example",
+			synopsis: "perform numeric operations",
+			usage:    "example (-m|-a) <number> <number>",
+		},
 	}
 }
 
-func (_ *exampleCmd) Name() string { return "example" }
-
-func (_ *exampleCmd) Synopsis() string { return "Example add/subtract" }
-
-func (_ *exampleCmd) Usage() string { return "example (-a|-m) number number\n" }
-
-func (cmd *exampleCmd) SetFlags(f *flag.FlagSet) {
-	f.BoolVar(&cmd.multiply, "m", false, "multiply")
-	f.BoolVar(&cmd.add, "a", false, "add")
+func (ec *exampleCmd) SetFlags(f *flag.FlagSet) {
+	f.BoolVar(&ec.multiply, "m", false, "multiply")
+	f.BoolVar(&ec.add, "a", false, "add")
 }
 
-func (cmd *exampleCmd) Execute(_ context.Context, f *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
-
+func (ec *exampleCmd) Execute(_ context.Context, f *flag.FlagSet, args ...interface{}) subcommands.ExitStatus {
 	const (
 		numberOfArgs = 2
 	)
 
-	if cmd.rootOpts.verbose {
+	var rootOpts *rootOptions = args[0].(*rootOptions)
+
+	if rootOpts.verbose {
 		fmt.Printf("Args: %v\n", f.Args())
 	}
 
 	if len(f.Args()) != numberOfArgs {
-		log.Printf("Takes two arguments\n")
+		fmt.Fprintf(os.Stderr, "Must pass two arguments")
+		return subcommands.ExitUsageError
+	} else if ec.add == ec.multiply { // XOR
+		fmt.Fprintf(os.Stderr, "Must chose add or multiply")
 		return subcommands.ExitUsageError
 	}
-
-	if cmd.add == cmd.multiply { // XOR
-		log.Printf("Must select add or multiply\n")
-		return subcommands.ExitUsageError
-	}
-
 	values := make([]int, numberOfArgs)
 	for i, a := range f.Args() {
 		v, err := convert.ToInteger(a)
 		if err != nil {
-			log.Printf("Invalid number: %s\n", a)
+			fmt.Fprintf(os.Stderr, "Invalid number argument: %s", a)
 			return subcommands.ExitUsageError
 		}
 		values[i] = v
 	}
 
-	if cmd.multiply {
+	if ec.multiply {
 		fmt.Printf("%d\n", example.Multiply(values[0], values[1]))
-	} else if cmd.add {
+	} else if ec.add {
 		fmt.Printf("%d\n", example.Add(values[0], values[1]))
 	}
-
 	return subcommands.ExitSuccess
 }

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"context"
 	"flag"
 	"fmt"
 
@@ -9,30 +8,27 @@ import (
 )
 
 type versionCmd struct {
-	rootOpts *rootOptions
+	metaCommand
 }
 
-func versionCommand(rootOpts *rootOptions) subcommands.Command {
+func versionCommand() subcommands.Command {
 	return &versionCmd{
-		rootOpts: rootOpts,
+		metaCommand: metaCommand{
+			name:     "version",
+			synopsis: "print version",
+			usage:    "version",
+			setFlags: func(_ *flag.FlagSet) {},
+			execute: func(rootOpts *rootOptions, f *flag.FlagSet) error {
+				if rootOpts.verbose {
+					fmt.Printf("Printing version string: %s\n", rootOpts.version)
+				}
+				if rootOpts.version == "" {
+					return fmt.Errorf("Version not set")
+				}
+
+				fmt.Printf("%s\n", rootOpts.version)
+				return nil
+			},
+		},
 	}
-}
-
-func (_ *versionCmd) Name() string { return "version" }
-
-func (_ *versionCmd) Synopsis() string { return "Print version" }
-
-func (_ *versionCmd) Usage() string { return "version\n" }
-
-func (_ *versionCmd) SetFlags(f *flag.FlagSet) {}
-
-func (cmd *versionCmd) Execute(_ context.Context, f *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
-	if cmd.rootOpts.verbose {
-		fmt.Printf("Printing version string: %s\n", cmd.rootOpts.version)
-	}
-	if cmd.rootOpts.version == "" {
-		return subcommands.ExitFailure
-	}
-	fmt.Printf("%s\n", cmd.rootOpts.version)
-	return subcommands.ExitSuccess
 }

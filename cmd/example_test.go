@@ -16,6 +16,7 @@ func TestExampleCommand(t *testing.T) {
 		{[]string{"-m", "1", "2"}, subcommands.ExitSuccess},
 		{[]string{"-a", "1", "2"}, subcommands.ExitSuccess},
 		{[]string{}, subcommands.ExitUsageError},
+		{[]string{"-m", "-a", "1", "2"}, subcommands.ExitUsageError},
 		{[]string{"1", "2"}, subcommands.ExitUsageError},
 		{[]string{"-x", "1", "2"}, subcommands.ExitUsageError},
 		{[]string{"-m", "1", "2", "3"}, subcommands.ExitUsageError},
@@ -29,7 +30,7 @@ func TestExampleCommand(t *testing.T) {
 
 	for i, tc := range testCases {
 
-		command := exampleCommand(&opts)
+		command := exampleCommand()
 
 		fs := flag.NewFlagSet("test", flag.ContinueOnError)
 
@@ -40,7 +41,7 @@ func TestExampleCommand(t *testing.T) {
 			t.Logf("[%d] Ignoring argument parsing error: %v", i, err)
 		}
 
-		exitStatus := command.Execute(context.Background(), fs)
+		exitStatus := command.Execute(context.Background(), fs, &opts)
 
 		if exitStatus != tc.expectedExitStatus {
 			t.Errorf(

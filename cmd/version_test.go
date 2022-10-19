@@ -17,7 +17,7 @@ func TestVersionCommand(t *testing.T) {
 	}{
 		{false, "test", []string{}, subcommands.ExitSuccess},
 		{true, "test", []string{}, subcommands.ExitSuccess},
-		{true, "test", []string{"blah"}, subcommands.ExitSuccess},
+		{true, "test", []string{"version"}, subcommands.ExitSuccess},
 		{true, "", []string{}, subcommands.ExitFailure},
 	}
 
@@ -29,7 +29,7 @@ func TestVersionCommand(t *testing.T) {
 		}
 		fs := flag.NewFlagSet("test", flag.ContinueOnError)
 
-		command := versionCommand(&opts)
+		command := versionCommand()
 
 		command.SetFlags(fs)
 
@@ -38,7 +38,7 @@ func TestVersionCommand(t *testing.T) {
 			t.Logf("[%d] Ignoring argument parsing error: %v", i, err)
 		}
 
-		exitStatus := command.Execute(context.Background(), fs)
+		exitStatus := command.Execute(context.Background(), fs, &opts)
 
 		if exitStatus != tc.expectedExitStatus {
 			t.Errorf(

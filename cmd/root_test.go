@@ -12,7 +12,7 @@ func TestRun(t *testing.T) {
 	}{
 		// Usage errors
 		{[]string{}, 2},
-		{[]string{"blah"}, 2},
+		{[]string{"blergh"}, 2},
 		// Valid
 		{[]string{"commands"}, 0},
 		{[]string{"flags"}, 0},
