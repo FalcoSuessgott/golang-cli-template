@@ -6,9 +6,10 @@ import (
 	"github.com/mprimi/golang-cli-template/cmd"
 )
 
+var version = "dev"
+
 const (
 	name    = "golang-cli-template"
-	version = "dev" // Replaced at build time in release
 )
 
 func main() {
