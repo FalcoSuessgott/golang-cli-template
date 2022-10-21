@@ -2,7 +2,7 @@ projectname?=golang-cli-template
 
 default: build
 
-.PHONY: build install run test clean cover fmt lint mod check
+.PHONY: build install run test clean cover vet fmt lint mod check
 
 build:
 	@go build -ldflags "-X main.version=dev" -o $(projectname)
@@ -23,6 +23,9 @@ cover:
 	@go test -race $(shell go list ./... | grep -v /vendor/) -v -coverprofile=coverage.out
 	@go tool cover -func=coverage.out
 
+vet:
+	@go vet ./...
+
 fmt:
 	@gofmt -w -s  .
 
@@ -32,4 +35,4 @@ lint: # Depends on https://github.com/golangci/golangci-lint
 mod:
 	@go mod tidy
 
-check: mod fmt test lint cover
+check: mod fmt test lint cover vet
