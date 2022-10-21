@@ -1,8 +1,16 @@
+# Executable
 golang-cli-template
+
+# macOS
 .DS_Store
+
+# Tests
 *.test
+
+# Coverage
 coverage.out
-*.out
-# goreleaser
+coverage.html
+
+# Goreleaser
 /dist
 .envrc
