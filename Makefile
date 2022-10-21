@@ -22,6 +22,7 @@ clean:
 cover:
 	@go test -race $(shell go list ./... | grep -v /vendor/) -v -coverprofile=coverage.out
 	@go tool cover -func=coverage.out
+	@go tool cover -html coverage.out -o coverage.html
 
 vet:
 	@go vet ./...
