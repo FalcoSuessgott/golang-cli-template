@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine
+FROM golang:1.19-alpine
 
 WORKDIR /app
 
@@ -8,6 +8,6 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -ldflags "-X main.version=1.0.0" -o golang-cli-template
+RUN go build -ldflags "-s -w -X main.version=1.0.0" -o golang-cli-template
 
 CMD [ "./golang-cli-template" ]

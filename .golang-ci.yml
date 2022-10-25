@@ -13,3 +13,14 @@ linters:
     - maligned
     - scopelint
     - golint
+    - varcheck
+    - nosnakecase
+    - deadcode
+    - ifshort
+    - structcheck
+    - rowserrcheck
+    - sqlclosecheck
+    - structcheck
+    - wastedassign
+    - exhaustruct
+    - nolintlint

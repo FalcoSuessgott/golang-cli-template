@@ -3,7 +3,7 @@ package cmd
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -19,7 +19,7 @@ func TestVersionCommand(t *testing.T) {
 	err := cmd.Execute()
 	require.NoError(t, err)
 
-	out, err := ioutil.ReadAll(b)
+	out, err := io.ReadAll(b)
 	require.NoError(t, err)
 
 	assert.Equal(t, fmt.Sprintln(version), string(out))
