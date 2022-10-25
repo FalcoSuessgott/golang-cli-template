@@ -1,5 +1,5 @@
 ---
-image: tetafro/golang-gcc:1.15-alpine
+image: tetafro/golang-gcc:1.19-alpine
 
 stages:
   - lint

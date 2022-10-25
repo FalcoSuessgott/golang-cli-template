@@ -27,13 +27,14 @@ This template serves as a starting point for golang commandline applications it 
 - [Makefile](Makefile) - with various useful targets and documentation (see Makefile Targets)
 - [Github Pages](_config.yml) using [jekyll-theme-minimal](https://github.com/pages-themes/minimal) (checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/golang-cli-template/))
 - [pre-commit-hooks](https://pre-commit.com/) for formatting and validating code before committing
-- [semantic-releaser](https://semantic-release.gitbook.io/semantic-release/)
 
 # Project Layout
 * [assets/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/assets) => docs, images, etc
 * [cmd/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/cmd)  => commandline configurartions (flags, subcommands)
 * [pkg/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/pkg)  => packages that are okay to import for other projects
 * [internal/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/pkg)  => packages that are only for project internal purposes
+- [`tools/`](tools/) => for automatically shipping all required dependencies when running `go get` (or `make bootstrap`) such as `golang-ci-lint` (see: https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module)
+)
 
 # How to use this template
 ```sh
@@ -62,29 +63,28 @@ Use "golang-cli-template [command] --help" for more information about a command.
 ```
 
 ```sh
-$> golang-cli-template example 2 5 -a
+$> golang-cli-template example 2 5 --add
 7
 
-$> golang-cli-template example 2 5 -m
+$> golang-cli-template example 2 5 --multiply
 10
 ```
 
 # Makefile Targets
 ```sh
 $> make
+bootstrap                      install build deps
 build                          build golang binary
 clean                          clean up environment
 cover                          display test coverage
 docker-build                   dockerize golang application
-fmtcheck                       run gofmt and print detected files
 fmt                            format go files
 help                           list makefile targets
 install                        install golang binary
-lint-fix                       fix
 lint                           lint go files
 pre-commit                     run pre-commit hooks
 run                            run the app
-test                           run go tests
+test                           display test coverage
 ```
 
 # Contribute

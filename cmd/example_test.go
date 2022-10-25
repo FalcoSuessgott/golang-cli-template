@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -49,7 +49,7 @@ func TestExampleCommand(t *testing.T) {
 		cmd.SetOut(b)
 
 		err := cmd.Execute()
-		out, _ := ioutil.ReadAll(b)
+		out, _ := io.ReadAll(b)
 
 		if tc.err {
 			assert.Error(t, err, tc.name)

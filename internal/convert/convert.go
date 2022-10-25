@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-//nolint
+// nolint: goerr113
 var errConversionError = func(v interface{}) error {
 	return fmt.Errorf("cannot convert value %v (type %T) to integer", v, v)
 }
