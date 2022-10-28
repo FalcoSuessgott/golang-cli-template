@@ -1,17 +1,22 @@
+project?=github.com/mprimi/golang-cli-template
 projectname?=golang-cli-template
+version?=dev
+sha?=$(shell git rev-parse --short HEAD)
+date?=$(shell date "+%Y-%m-%d_%H:%M:%S")
+linkflags="-X $(project)/cmd.Version=$(version) -X $(project)/cmd.SHA=$(sha) -X $(project)/cmd.BuildDate=$(date)"
 
 default: build
 
 .PHONY: build install run test clean cover vet fmt lint mod check
 
 build:
-	@go build -ldflags "-X main.version=dev" -o $(projectname)
+	@go build -ldflags $(linkflags) -o $(projectname)
 
 install:
-	@go install -ldflags "-X main.version=dev"
+	@go install -ldflags $(linkflags)
 
 run:
-	@go run -ldflags "-X main.version=dev"  main.go
+	@go run -ldflags $(linkflags) main.go
 
 test:
 	@go test -v -count=1 ./...

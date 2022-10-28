@@ -10,12 +10,6 @@ import (
 )
 
 type rootOptions struct {
-	// Build-time properties
-	name      string
-	version   string
-	sha       string
-	buildDate string
-
 	// Top-level options
 	verbose bool
 }
@@ -58,18 +52,13 @@ func (mc *metaCommand) Execute(_ context.Context, f *flag.FlagSet, args ...inter
 }
 
 // Entry point
-func Run(name, version, sha, buildDate string, args []string) int {
-	var rootOps = rootOptions{
-		name:      name,
-		version:   version,
-		sha:       sha,
-		buildDate: buildDate,
-	}
+func Run(args []string) int {
+	var rootOps = rootOptions{}
 
 	rootFs := flag.NewFlagSet("", flag.ExitOnError)
 	rootFs.BoolVar(&rootOps.verbose, "v", false, "verbose")
 
-	cmdr := subcommands.NewCommander(rootFs, name)
+	cmdr := subcommands.NewCommander(rootFs, Name)
 
 	commandsMap := map[string][]subcommands.Command{
 		"example": {

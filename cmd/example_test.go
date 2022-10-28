@@ -24,7 +24,6 @@ func TestExampleCommand(t *testing.T) {
 	}
 
 	opts := rootOptions{
-		version: "dev",
 		verbose: false,
 	}
 

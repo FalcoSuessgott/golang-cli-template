@@ -9,7 +9,7 @@ before:
 builds:
   -
     binary: golang-cli-template
-    ldflags: -s -w -X main.version={{ .Version }} -X main.sha={{ .ShortCommit }} -X main.buildDate={{ .Date }}
+    ldflags: -s -w -X github.com/mprimi/golang-cli-template/cmd.Version={{ .Version }} -X github.com/mprimi/golang-cli-template/cmd.SHA={{ .ShortCommit }} -X github.com/mprimi/golang-cli-template/cmd.BuildDate={{ .Date }}
     goos:
       - linux
       - darwin

@@ -17,14 +17,12 @@ func TestVersionCommand(t *testing.T) {
 	}{
 		{false, "test", []string{}, subcommands.ExitSuccess},
 		{true, "test", []string{}, subcommands.ExitSuccess},
-		{true, "test", []string{"version"}, subcommands.ExitSuccess},
-		{true, "", []string{}, subcommands.ExitFailure},
+		{true, "test", []string{"blah"}, subcommands.ExitSuccess},
 	}
 
 	for i, tc := range testCases {
 
 		opts := rootOptions{
-			version: tc.version,
 			verbose: tc.verbose,
 		}
 		fs := flag.NewFlagSet("test", flag.ContinueOnError)
