@@ -38,7 +38,7 @@ This template serves as a starting point for golang commandline applications it 
 
 # How to use this template
 ```sh
-bash <(curl -s https://raw.githubusercontent.com/FalcoSuessgott/golang-cli-template/main/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/FalcoSuessgott/golang-cli-template/master/install.sh)
 ```
 
 # Demo Application
