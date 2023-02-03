@@ -31,7 +31,7 @@ This template serves as a starting point for golang commandline applications it 
 <!--te-->
 
 # Features
-- [goreleaser](https://goreleaser.com/) with `deb.` and `.rpm` packer and container (`docker.hub` and `ghcr.io`) releasing including `manpages` and `shell completions`
+- [goreleaser](https://goreleaser.com/) with `deb.` and `.rpm` packer and container (`docker.hub` and `ghcr.io`) releasing including `manpages` and `shell completions` and grouped Changelog generation.
 - [golangci-lint](https://golangci-lint.run/) for linting and formatting
 - [Github Actions](.github/worflows) Stages (Lint, Test (`windows`, `linux`, `mac-os`), Build, Release) 
 - [Gitlab CI](.gitlab-ci.yml) Configuration (Lint, Test, Build, Release)
