@@ -4,7 +4,8 @@ env:
 
 before:
   hooks:
-    - go mod tidy
+    - ./scripts/manpages.sh
+    - ./scripts/completions.sh
 
 builds:
   -
@@ -30,24 +31,119 @@ archives:
       amd64: x86_64
 
 nfpms:
-  -
-    vendor: golang-cli-template
+  - builds:
+      - golang-cli-template
+    vendor: FalcoSuessgott
     homepage:  https://github.com/FalcoSuessgott/golang-cli-template
-    maintainer: "Tom Morelly <tom-morelly@gmx.de"
+    maintainer: "Tom Morelly <tommorelly@gmail.com>"
     description: "A general purpose golang CLI template for Github and Gitlab"
     license: GPL-3.0
     formats:
       - apk
       - deb
       - rpm
-    bindir: /usr/local/bin
+    bindir: /usr/bin
+    contents:
+      - src: ./manpages/golang-cli-template.1.gz
+        dst: /usr/share/man/man1/golang-cli-template.1.gz
+        file_info:
+          mode: 0644
+      - src: ./completions/golang-cli-template.bash
+        dst: /usr/share/bash-completion/completions/golang-cli-template
+        file_info:
+          mode: 0644
+      - src: ./completions/golang-cli-template.fish
+        dst: /usr/share/fish/vendor_completions.d/golang-cli-template.fish
+        file_info:
+          mode: 0644
+      - src: ./completions/golang-cli-template.zsh
+        dst:  /usr/share/zsh/vendor-completions/_golang-cli-template
+        file_info:
+          mode: 0644
+
+dockers:
+- image_templates:
+  - 'falcosuessgott/{{.ProjectName}}:{{ .Tag }}-amd64'
+  - 'ghcr.io/falcosuessgott/{{.ProjectName}}:{{ .Tag }}-amd64'
+  dockerfile: Dockerfile
+  use: buildx
+  build_flag_templates:
+  - "--pull"
+  - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/FalcoSuessgott/golang-cli-template/master/README.md"
+  - "--label=io.artifacthub.package.maintainers=[{\"name\":\"Tom Morelly\",\"email\":\"tommorelly@gmail.com\"}]"
+  - "--label=io.artifacthub.package.license=MIT"
+  - "--label=org.opencontainers.image.description=A general purpose golang CLI template for Github and Gitlab"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/amd64"
+- image_templates:
+  - 'falcosuessgott/{{.ProjectName}}:{{ .Tag }}-arm64'
+  - 'ghcr.io/falcosuessgott/{{.ProjectName}}:{{ .Tag }}-arm64'
+  dockerfile:  Dockerfile
+  use: buildx
+  build_flag_templates:
+  - "--pull"
+  - "--label=io.artifacthub.package.readme-url=https://raw.githubusercontent.com/FalcoSuessgott/golang-cli-template/master/README.md"
+  - "--label=io.artifacthub.package.logo-url=https://raw.githubusercontent.com/FalcoSuessgott/golang-cli-template/master/www/static/images/logo.png"
+  - "--label=io.artifacthub.package.maintainers=[{\"name\":\"Tom Morelly\",\"email\":\"tommorelly@gmail.com\"}]"
+  - "--label=io.artifacthub.package.license=MIT"
+  - "--label=org.opencontainers.image.description=A general purpose golang CLI template for Github and Gitlab"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/arm64"
+  goarch: arm64
+
+docker_manifests:
+- name_template: 'falcosuessgott/{{.ProjectName}}:{{ .Tag }}'
+  image_templates:
+  - 'falcosuessgott/{{.ProjectName}}:{{ .Tag }}-amd64'
+  - 'falcosuessgott/{{.ProjectName}}:{{ .Tag }}-arm64'
+- name_template: 'ghcr.io/falcosuessgott/{{.ProjectName}}:{{ .Tag }}'
+  image_templates:
+  - 'ghcr.io/falcosuessgott/{{.ProjectName}}:{{ .Tag }}-amd64'
+  - 'ghcr.io/falcosuessgott/{{.ProjectName}}:{{ .Tag }}-arm64'
+- name_template: 'falcosuessgott/{{.ProjectName}}:latest'
+  image_templates:
+  - 'falcosuessgott/{{.ProjectName}}:{{ .Tag }}-amd64'
+  - 'falcosuessgott/{{.ProjectName}}:{{ .Tag }}-arm64'
+- name_template: 'ghcr.io/falcosuessgott/{{.ProjectName}}:latest'
+  image_templates:
+  - 'ghcr.io/falcosuessgott/{{.ProjectName}}:{{ .Tag }}-amd64'
+  - 'ghcr.io/falcosuessgott/{{.ProjectName}}:{{ .Tag }}-arm64'
 
 checksum:
   name_template: "checksums.txt"
 
 changelog:
   sort: asc
+  use: github
   filters:
     exclude:
-      - "^assets:"
-      - "^scripts:"
+    - '^test:'
+    - '^chore'
+    - 'merge conflict'
+    - Merge pull request
+    - Merge remote-tracking branch
+    - Merge branch
+    - go mod tidy
+  groups:
+    - title: Dependency updates
+      regexp: '^.*?(feat|fix)\(deps\)!?:.+$'
+      order: 300
+    - title: 'New Features'
+      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      order: 100
+    - title: 'Bug fixes'
+      regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+      order: 200
+    - title: 'Documentation updates'
+      regexp: ^.*?doc(\([[:word:]]+\))??!?:.+$
+      order: 400
+    - title: Other work
+      order: 9999

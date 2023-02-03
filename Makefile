@@ -24,8 +24,9 @@ bootstrap: ## install build deps
 
 PHONY: test
 test: clean ## display test coverage
-	go test -json -v ./... | gotestfmt
-
+	go test --cover -parallel=1 -v -coverprofile=coverage.out ./...
+	go tool cover -func=coverage.out | sort -rnk3
+	
 PHONY: clean
 clean: ## clean up environment
 	@rm -rf coverage.out dist/ $(projectname)
@@ -43,14 +44,6 @@ fmt: ## format go files
 PHONY: lint
 lint: ## lint go files
 	golangci-lint run -c .golang-ci.yml
-
-.PHONY: docker-build
-docker-build: ## dockerize golang application
-	@docker build --tag $(projectname) .
-
-.PHONY: docker-run
-docker-run:
-	@docker run $(projectname)
 
 .PHONY: pre-commit
 pre-commit:	## run pre-commit hooks

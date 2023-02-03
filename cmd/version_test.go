@@ -22,5 +22,5 @@ func TestVersionCommand(t *testing.T) {
 	out, err := io.ReadAll(b)
 	require.NoError(t, err)
 
-	assert.Equal(t, fmt.Sprintln(version), string(out))
+	assert.Equal(t, fmt.Sprintf("golang-cli-template: %s\n", version), string(out))
 }

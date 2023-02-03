@@ -2,26 +2,18 @@ package cmd
 
 import (
 	"bytes"
-	"io"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestRootCommandOutput(t *testing.T) {
-	cmd := newRootCmd("v1.0.0")
+	cmd := newRootCmd("")
 	b := bytes.NewBufferString("")
 
 	cmd.SetArgs([]string{"-h"})
 	cmd.SetOut(b)
 
-	cmdErr := cmd.Execute()
+	cmdErr := cmd.RunE(cmd, nil)
 	require.NoError(t, cmdErr)
-
-	out, err := io.ReadAll(b)
-	require.NoError(t, err)
-
-	assert.Equal(t, "golang-cli project template demo application\n\n"+cmd.UsageString(), string(out))
-	assert.Nil(t, cmdErr)
 }

@@ -4,3 +4,10 @@ coverage:
       default:
         target: auto
         threshold: 5%
+    patch:
+      default:
+        target: 50%
+        threshold: 5%
+
+ignore:
+  - "cmd/man.go"
