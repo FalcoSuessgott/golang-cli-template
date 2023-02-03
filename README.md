@@ -1,6 +1,22 @@
 # golang-cli-template
-A general purpose project template for golang CLI applications
 
+<div align="center">
+A general purpose project template for golang CLI applications
+<br>
+<br>
+This template serves as a starting point for golang commandline applications it is based on golang projects that I consider high quality and various other useful blog posts that helped me understanding golang better.
+<br>
+<br>
+<img src="https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/test.yml/badge.svg" alt="drawing"/>
+<img src="https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/lint.yml/badge.svg" alt="drawing"/>
+<img src="https://pkg.go.dev/badge/github.com/FalcoSuessgott/golang-cli-template.svg" alt="drawing"/>
+<img src="https://codecov.io/gh/FalcoSuessgott/golang-cli-template/branch/main/graph/badge.svg" alt="drawing"/>
+<img src="https://img.shields.io/github/v/release/FalcoSuessgott/golang-cli-template" alt="drawing"/>
+<img src="https://img.shields.io/docker/pulls/falcosuessgott/golang-cli-template" alt="drawing"/>
+<img src="https://img.shields.io/github/downloads/FalcoSuessgott/golang-cli-template/total.svg" alt="drawing"/>
+</div>
+
+# Table of Contents
 <!--ts-->
    * [golang-cli-template](#golang-cli-template)
    * [Features](#features)
@@ -14,18 +30,15 @@ A general purpose project template for golang CLI applications
 
 <!--te-->
 
-[![Test](https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/test.yml/badge.svg)](https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/test.yml) [![golangci-lint](https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/lint.yml/badge.svg)](https://github.com/FalcoSuessgott/golang-cli-template/actions/workflows/lint.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/FalcoSuessgott/golang-cli-template)](https://goreportcard.com/report/github.com/FalcoSuessgott/golang-cli-template) [![Go Reference](https://pkg.go.dev/badge/github.com/FalcoSuessgott/golang-cli-template.svg)](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template) [![codecov](https://codecov.io/gh/FalcoSuessgott/golang-cli-template/branch/main/graph/badge.svg?token=Y5K4SID71F)](https://codecov.io/gh/FalcoSuessgott/golang-cli-template)
-
-This template serves as a starting point for golang commandline applications it is based on golang projects that I consider high quality and various other useful blog posts that helped me understanding golang better.
-
 # Features
-- [goreleaser](https://goreleaser.com/) with `deb.` and `.rpm` package releasing
+- [goreleaser](https://goreleaser.com/) with `deb.` and `.rpm` packer and container (`docker.hub` and `ghcr.io`) releasing including `manpages` and `shell completions`
 - [golangci-lint](https://golangci-lint.run/) for linting and formatting
-- [Github Actions](.github/worflows) Stages (Lint, Test, Build, Release)
+- [Github Actions](.github/worflows) Stages (Lint, Test (`windows`, `linux`, `mac-os`), Build, Release) 
 - [Gitlab CI](.gitlab-ci.yml) Configuration (Lint, Test, Build, Release)
 - [cobra](https://cobra.dev/) example setup including tests
 - [Makefile](Makefile) - with various useful targets and documentation (see Makefile Targets)
 - [Github Pages](_config.yml) using [jekyll-theme-minimal](https://github.com/pages-themes/minimal) (checkout [https://falcosuessgott.github.io/golang-cli-template/](https://falcosuessgott.github.io/golang-cli-template/))
+- Useful `README.md` badges
 - [pre-commit-hooks](https://pre-commit.com/) for formatting and validating code before committing
 
 # Project Layout
@@ -35,16 +48,21 @@ This template serves as a starting point for golang commandline applications it 
 * [internal/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/pkg)  => packages that are only for project internal purposes
 - [`tools/`](tools/) => for automatically shipping all required dependencies when running `go get` (or `make bootstrap`) such as `golang-ci-lint` (see: https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module)
 )
+- [`scripts/`](scripts/) => build scripts 
 
 # How to use this template
 ```sh
 bash <(curl -s https://raw.githubusercontent.com/FalcoSuessgott/golang-cli-template/master/install.sh)
 ```
 
+In order to make the CI work you will need to have the following Secrets in your repository defined:
+
+Repository  -> Settings -> Secrets & variables -> `CODECOV_TOKEN`, `DOCKERHUB_TOKEN` & `DOCKERHUB_USERNAME`
+
 # Demo Application
 
 ```sh
-$> golang-cli-template
+$> golang-cli-template -h
 golang-cli project template demo application
 
 Usage:
@@ -52,9 +70,10 @@ Usage:
   golang-cli-template [command]
 
 Available Commands:
+  completion  Generate the autocompletion script for the specified shell
   example     example subcommand which adds or multiplies two given integers
   help        Help about any command
-  version     Displays d4sva binary version
+  version     golang-cli-template version
 
 Flags:
   -h, --help   help for golang-cli-template
