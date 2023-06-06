@@ -278,8 +278,8 @@ github.com/gostaticanalysis/nilerr v0.1.1 h1:ThE+hJP0fEp4zWLkWHWcRyI2Od0p7DlgYG3
 github.com/gostaticanalysis/nilerr v0.1.1/go.mod h1:wZYb6YI5YAxxq0i1+VJbY0s2YONW0HU0GPE3+5PWN4A=
 github.com/gostaticanalysis/testutil v0.3.1-0.20210208050101-bfb5c8eec0e4/go.mod h1:D+FIZ+7OahH3ePw/izIEeH5I06eKs1IKI4Xr64/Am3M=
 github.com/gostaticanalysis/testutil v0.4.0 h1:nhdCmubdmDF6VEatUNjgUZBJKWRqugoISdUv3PPQgHY=
-github.com/gotesttools/gotestfmt/v2 v2.4.1 h1:Ml+KPqPocp/KckpizL+tgsy/dlddI4/z2w6lgS7YIFE=
-github.com/gotesttools/gotestfmt/v2 v2.4.1/go.mod h1:oQJg2KZ2aGoqEbMC2PDaAeBYm0tOkocgixK9FzsCdp4=
+github.com/gotesttools/gotestfmt/v2 v2.5.0 h1:fSU3MnR+E+fvuXdw1l8xbufKhDxY3Tfjsjx/I1WerB4=
+github.com/gotesttools/gotestfmt/v2 v2.5.0/go.mod h1:oQJg2KZ2aGoqEbMC2PDaAeBYm0tOkocgixK9FzsCdp4=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-multierror v1.1.1 h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+lD48awMYo=
