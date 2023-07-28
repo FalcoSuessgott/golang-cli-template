@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/daixiang0/gci v0.10.1
-	github.com/go-critic/go-critic v0.8.1
+	github.com/go-critic/go-critic v0.8.2
 	github.com/golangci/golangci-lint v1.53.3
 	github.com/gotesttools/gotestfmt/v2 v2.5.0
 	github.com/muesli/mango-cobra v1.2.0
