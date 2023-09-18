@@ -3,7 +3,7 @@ module github.com/FalcoSuessgott/golang-cli-template
 go 1.19
 
 require (
-	github.com/daixiang0/gci v0.11.1
+	github.com/daixiang0/gci v0.11.2
 	github.com/go-critic/go-critic v0.9.0
 	github.com/golangci/golangci-lint v1.54.2
 	github.com/gotesttools/gotestfmt/v2 v2.5.0
