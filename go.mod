@@ -12,7 +12,7 @@ require (
 	github.com/spf13/cobra v1.8.0
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
-	golang.org/x/tools v0.15.0
+	golang.org/x/tools v0.16.0
 	mvdan.cc/gofumpt v0.5.0
 )
 
