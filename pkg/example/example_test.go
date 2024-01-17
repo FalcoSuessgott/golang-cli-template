@@ -3,7 +3,7 @@ package example
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestSum(t *testing.T) {
@@ -28,7 +28,7 @@ func TestSum(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		assert.Equal(t, tc.expected, Add(tc.a, tc.b))
+		require.Equal(t, tc.expected, Add(tc.a, tc.b))
 	}
 }
 
@@ -54,6 +54,6 @@ func TestMultiply(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		assert.Equal(t, tc.expected, Multiply(tc.a, tc.b))
+		require.Equal(t, tc.expected, Multiply(tc.a, tc.b))
 	}
 }

@@ -5,7 +5,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestExampleCommand(t *testing.T) {
@@ -52,9 +52,9 @@ func TestExampleCommand(t *testing.T) {
 		out, _ := io.ReadAll(b)
 
 		if tc.err {
-			assert.Error(t, err, tc.name)
+			require.Error(t, err, tc.name)
 		} else {
-			assert.Equal(t, tc.expected, string(out), tc.name)
+			require.Equal(t, tc.expected, string(out), tc.name)
 		}
 	}
 }

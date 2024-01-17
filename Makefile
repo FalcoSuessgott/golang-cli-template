@@ -49,3 +49,6 @@ lint: ## lint go files
 pre-commit:	## run pre-commit hooks
 	pre-commit run --all-files
 
+.PHONY: docs
+docs: ## build and serve docs
+	mkdocs serve
