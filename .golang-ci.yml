@@ -25,3 +25,4 @@ linters:
     - exhaustruct
     - nolintlint
     - wrapcheck
+    - depguard

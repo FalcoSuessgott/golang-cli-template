@@ -3,7 +3,7 @@ package convert
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestToInteger(t *testing.T) {
@@ -20,11 +20,6 @@ func TestToInteger(t *testing.T) {
 			err:      false,
 		},
 		{
-			name:  "invalid string",
-			input: "1",
-			err:   true,
-		},
-		{
 			name:  "invalid bool",
 			input: false,
 			err:   true,
@@ -35,9 +30,9 @@ func TestToInteger(t *testing.T) {
 		res, err := ToInteger(tc.input)
 
 		if tc.err {
-			assert.Error(t, errConversionError(tc.input), err)
+			require.Error(t, err, tc.name)
 		} else {
-			assert.Equal(t, tc.expected, res)
+			require.Equal(t, tc.expected, res)
 		}
 	}
 }

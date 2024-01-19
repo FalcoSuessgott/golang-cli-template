@@ -16,33 +16,19 @@ This template serves as a starting point for golang commandline applications it 
 <img src="https://img.shields.io/github/downloads/FalcoSuessgott/golang-cli-template/total.svg" alt="drawing"/>
 </div>
 
-# Table of Contents
-<!--ts-->
-   * [golang-cli-template](#golang-cli-template)
-   * [Features](#features)
-   * [Project Layout](#project-layout)
-   * [How to use this template](#how-to-use-this-template)
-   * [Demo Application](#demo-application)
-   * [Makefile Targets](#makefile-targets)
-   * [Contribute](#contribute)
-
-<!-- Added by: morelly_t1, at: Tue 10 Aug 2021 08:54:24 AM CEST -->
-
-<!--te-->
-
-# Features
+## Features
 - [goreleaser](https://goreleaser.com/) with `deb.` and `.rpm` packer and container (`docker.hub` and `ghcr.io`) releasing including `manpages` and `shell completions` and grouped Changelog generation.
 - [golangci-lint](https://golangci-lint.run/) for linting and formatting
 - [Github Actions](.github/worflows) Stages (Lint, Test (`windows`, `linux`, `mac-os`), Build, Release) 
 - [Gitlab CI](.gitlab-ci.yml) Configuration (Lint, Test, Build, Release)
 - [cobra](https://cobra.dev/) example setup including tests
 - [Makefile](Makefile) - with various useful targets and documentation (see Makefile Targets)
-- [Github Pages](https://falcosuessgott.github.io/golang-cli-template/) using mkdocs [mkdocs-material](https://squidfunk.github.io/mkdocs-material/)
+- Github Pages using mkdocs [mkdocs-material](https://squidfunk.github.io/mkdocs-material/)
 - Useful `README.md` badges
 - [pre-commit-hooks](https://pre-commit.com/) for formatting and validating code before committing
 - [gotestsum](https://github.com/gotestyourself/gotestsum) for improved test overview
 
-# Project Layout
+## Project Layout
 * [assets/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/assets) => docs, images, etc
 * [cmd/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/cmd)  => commandline configurartions (flags, subcommands)
 * [pkg/](https://pkg.go.dev/github.com/FalcoSuessgott/golang-cli-template/pkg)  => packages that are okay to import for other projects
@@ -51,7 +37,7 @@ This template serves as a starting point for golang commandline applications it 
 )
 - [scripts/](scripts/) => build scripts 
 
-# How to use this template
+## How to use this template
 ```sh
 bash <(curl -s https://raw.githubusercontent.com/FalcoSuessgott/golang-cli-template/master/install.sh)
 ```
@@ -60,7 +46,7 @@ In order to make the CI work you will need to have the following Secrets in your
 
 Repository  -> Settings -> Secrets & variables -> `CODECOV_TOKEN`, `DOCKERHUB_TOKEN` & `DOCKERHUB_USERNAME`
 
-# Demo Application
+## Demo Application
 
 ```sh
 $> golang-cli-template -h
@@ -90,14 +76,14 @@ $> golang-cli-template example 2 5 --multiply
 10
 ```
 
-# Makefile Targets
+## Makefile Targets
 ```sh
 $> make
 bootstrap                      install build deps
 build                          build golang binary
 clean                          clean up environment
 cover                          display test coverage
-docker-build                   dockerize golang application
+docs                           build and serve docs
 fmt                            format go files
 help                           list makefile targets
 install                        install golang binary
@@ -107,5 +93,5 @@ run                            run the app
 test                           display test coverage
 ```
 
-# Contribute
+## Contribute
 If you find issues in that setup or have some nice features / improvements, I would welcome an issue or a PR :)
